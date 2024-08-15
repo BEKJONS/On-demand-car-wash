@@ -1,0 +1,115 @@
+version: '3.8'
+
+services:
+  migrate:
+    image: migrate/migrate
+    networks:
+      - Car-wash
+
+    volumes:
+      - ./Auth_Service/migrations:/migrations
+    command: [ "-path", "/migrations", "-database", "postgres://postgres:BEKJONS@postgres:5432/auth_i?sslmode=disable", "up" ]
+    depends_on:
+      - postgres-db
+
+  postgres-db:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: BEKJONS
+      PGDATA: /data/postgres
+      POSTGRES_DB: auth_i
+    volumes:
+      - postgres_data:/var/lib/postgres/data
+    ports:
+      - "5433:5432"
+    networks:
+      - Car-wash
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  booking-service:
+    container_name: booking-service
+    build: ./Booking_service
+    depends_on:
+      - postgres-db
+      - mongo-db
+    ports:
+      - "50052:50052"
+    networks:
+      - Car-wash
+
+
+  api-gateway:
+    container_name: api-gateway
+    build: ./api-gateway
+    depends_on:
+      - postgres-db
+      - booking-service
+      - rabbitmq
+    ports:
+      - "8080:8080"
+    networks:
+      - Car-wash
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+    restart: unless-stopped
+
+  mongo-db:
+    container_name: mongo-db
+    image: mongo:latest
+    environment:
+      MongoDB_NAME: booking
+      MongoURI: mongodb://localhost:27017
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27018:27017"
+    networks:
+      - Car-wash
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5673:5672"
+      - "15672:15672"
+    networks:
+      - Car-wash
+
+  auth-service:
+    container_name: auth-service
+    build: ./Auth_Service
+    depends_on:
+      - postgres-db
+      - booking-service
+      - api-gateway
+      - redis
+    ports:
+      - "8081:8081"
+    networks:
+      - Car-wash
+
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6378:6379"
+    networks:
+      - Car-wash
+
+networks:
+  Car-wash:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  mongo_data:

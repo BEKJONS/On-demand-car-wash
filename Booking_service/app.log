@@ -1,0 +1,72 @@
+time=2024-08-14T23:37:52.547+05:00 level=INFO msg="Creating review" booking_id="" user_id=433060af-4df2-43d8-8833-1b4a31726984 provider_id=""
+time=2024-08-14T23:37:52.598+05:00 level=INFO msg="Review created successfully" review_id=66bcf980b716845078cb7b88
+time=2024-08-14T23:44:16.754+05:00 level=INFO msg="Creating review" booking_id="" user_id=1e61c246-072b-4223-a8ec-a1f58cec1437 provider_id=""
+time=2024-08-14T23:44:16.755+05:00 level=INFO msg="Review created successfully" review_id=66bcfb00b716845078cb7b89
+time=2024-08-14T23:44:48.417+05:00 level=INFO msg="Creating review" booking_id="" user_id=1e61c246-072b-4223-a8ec-a1f58cec1437 provider_id=""
+time=2024-08-14T23:44:48.418+05:00 level=INFO msg="Review created successfully" review_id=66bcfb20b716845078cb7b8a
+time=2024-08-14T23:46:31.899+05:00 level=INFO msg="Shutting down, waiting for consumers to finish"
+time=2024-08-14T23:46:31.899+05:00 level=INFO msg="Context done, stopping consumer" consumer=payment_processed
+time=2024-08-14T23:46:31.899+05:00 level=INFO msg="Context done, stopping consumer" consumer=review_submitted
+time=2024-08-14T23:46:31.899+05:00 level=INFO msg="Context done, stopping consumer" consumer=booking_cancelled
+time=2024-08-14T23:46:31.899+05:00 level=INFO msg="Context done, stopping consumer" consumer=create_booking
+time=2024-08-15T15:04:37.961+05:00 level=INFO msg="Shutting down, waiting for consumers to finish"
+time=2024-08-15T15:04:37.961+05:00 level=INFO msg="Context done, stopping consumer" consumer=payment_processed
+time=2024-08-15T15:04:37.961+05:00 level=INFO msg="Context done, stopping consumer" consumer=review_submitted
+time=2024-08-15T15:04:37.961+05:00 level=INFO msg="Context done, stopping consumer" consumer=booking_cancelled
+time=2024-08-15T15:04:37.961+05:00 level=INFO msg="Context done, stopping consumer" consumer=create_booking
+time=2024-08-15T15:42:12.038+05:00 level=INFO msg="CreateNotification is invoked" request="user_id:\"fcb9cb7d-6be1-4ab2-81b1-4a785fcfdcf7\"  title:\"string\"  message:\"string\""
+time=2024-08-15T15:42:12.073+05:00 level=INFO msg="CreateNotification is completed" response="id:\"66bddb8412702a629f888911\""
+time=2024-08-15T15:43:34.231+05:00 level=INFO msg="GetNotification is invoked" request="id:\"66bddb8412702a629f888911\""
+time=2024-08-15T15:43:34.234+05:00 level=INFO msg="GetNotification is completed" response="id:\"66bddb8412702a629f888911\"  user_id:\"fcb9cb7d-6be1-4ab2-81b1-4a785fcfdcf7\"  title:\"string\"  message:\"string\"  created_at:\"2024-08-15T15:42:12+05:00\""
+time=2024-08-15T15:44:11.980+05:00 level=INFO msg="CreateNotification is invoked" request="user_id:\"fcb9cb7d-6be1-4ab2-81b1-4a785fcfdcf7\"  title:\"string\"  message:\"string\""
+time=2024-08-15T15:44:11.981+05:00 level=INFO msg="CreateNotification is completed" response="id:\"66bddbfb12702a629f888912\""
+time=2024-08-15T15:47:07.024+05:00 level=INFO msg="Listing providers" page=1 limit=10
+time=2024-08-15T15:47:07.025+05:00 level=INFO msg="Providers listed successfully" count=0
+time=2024-08-15T15:47:17.241+05:00 level=INFO msg="Registering provider" user_id=fcb9cb7d-6be1-4ab2-81b1-4a785fcfdcf7
+time=2024-08-15T15:47:17.259+05:00 level=INFO msg="Provider registered successfully" company_name=string
+time=2024-08-15T15:47:24.030+05:00 level=INFO msg="Listing providers" page=1 limit=10
+time=2024-08-15T15:47:24.030+05:00 level=INFO msg="Providers listed successfully" count=1
+time=2024-08-15T15:53:14.132+05:00 level=INFO msg="Fetching review" review_id=66bddbfb12702a629f888912
+time=2024-08-15T15:53:14.133+05:00 level=ERROR msg="Failed to fetch review" error="mongo: no documents in result"
+time=2024-08-15T15:53:57.615+05:00 level=INFO msg="Fetching review" review_id=fcb9cb7d-6be1-4ab2-81b1-4a785fcfdcf7
+time=2024-08-15T15:53:57.616+05:00 level=ERROR msg="Failed to fetch review" error="mongo: no documents in result"
+time=2024-08-15T15:57:03.832+05:00 level=INFO msg="Fetching review" review_id=66bdccbaad09ca61549de1c9
+time=2024-08-15T15:57:03.832+05:00 level=INFO msg="Review fetched successfully" review_id=""
+time=2024-08-15T15:58:28.573+05:00 level=INFO msg="Fetching service by ID" id=66bdbfea3ec76f3f7f3f4860
+time=2024-08-15T15:58:28.573+05:00 level=INFO msg="Service fetched successfully" id=66bdbfea3ec76f3f7f3f4860
+time=2024-08-15T16:02:35.167+05:00 level=INFO msg=SearchProviders company_name=""
+time=2024-08-15T16:02:35.168+05:00 level=ERROR msg="Failed to search provider" error="error decoding key location: cannot decode embedded document into a string type"
+time=2024-08-15T16:04:37.372+05:00 level=INFO msg="Shutting down, waiting for consumers to finish"
+time=2024-08-15T16:04:37.372+05:00 level=INFO msg="Context done, stopping consumer" consumer=payment_processed
+time=2024-08-15T16:04:37.372+05:00 level=INFO msg="Context done, stopping consumer" consumer=review_submitted
+time=2024-08-15T16:04:37.372+05:00 level=INFO msg="Context done, stopping consumer" consumer=create_notification
+time=2024-08-15T16:04:37.372+05:00 level=INFO msg="Context done, stopping consumer" consumer=booking_cancelled
+time=2024-08-15T16:04:37.372+05:00 level=INFO msg="Context done, stopping consumer" consumer=create_booking
+time=2024-08-15T16:05:01.430+05:00 level=INFO msg=SearchProviders company_name=""
+time=2024-08-15T16:05:01.431+05:00 level=ERROR msg="Failed to search provider" error="error decoding key location: cannot decode embedded document into a string type"
+time=2024-08-15T16:07:32.959+05:00 level=INFO msg=SearchProviders company_name=""
+time=2024-08-15T16:07:32.960+05:00 level=INFO msg="Review created successfully"
+time=2024-08-15T16:11:35.856+05:00 level=INFO msg=SearchProviders company_name=""
+time=2024-08-15T16:11:35.857+05:00 level=INFO msg="Review created successfully"
+time=2024-08-15T16:11:44.967+05:00 level=INFO msg=SearchProviders company_name=""
+time=2024-08-15T16:11:44.967+05:00 level=INFO msg="Review created successfully"
+time=2024-08-15T16:12:09.541+05:00 level=INFO msg=SearchProviders company_name=a
+time=2024-08-15T16:12:09.541+05:00 level=INFO msg="Review created successfully"
+time=2024-08-15T16:12:14.965+05:00 level=INFO msg=SearchProviders company_name=search
+time=2024-08-15T16:12:14.965+05:00 level=INFO msg="Review created successfully"
+time=2024-08-15T16:12:20.113+05:00 level=INFO msg=SearchProviders company_name=string
+time=2024-08-15T16:12:20.113+05:00 level=INFO msg="Review created successfully"
+time=2024-08-15T16:12:31.484+05:00 level=INFO msg="Fetching review"
+time=2024-08-15T16:12:31.484+05:00 level=INFO msg="Review fetched successfully"
+time=2024-08-15T16:16:03.170+05:00 level=INFO msg="CreateBooking called" request="user_id:\"1e61c246-072b-4223-a8ec-a1f58cec1437\"  provider_id:\"string\"  service_id:\"string\"  scheduled_time:\"string\"  location:{}"
+time=2024-08-15T16:16:03.171+05:00 level=ERROR msg="failed to create booking" error="the provided hex string is not a valid ObjectID\ninvalid service ID format\nBooking_Service/storage/mongodb.(*BookingRepo).Add\n\t/home/fazliddin/go/go11/Fazliddin/Fazliddin/Ozodjon/4/Booking_service/storage/mongodb/Booking.go:42\nBooking_Service/service.(*BookingService).CreateBooking\n\t/home/fazliddin/go/go11/Fazliddin/Fazliddin/Ozodjon/4/Booking_service/service/Booking.go:26\nBooking_Service/messagebroker.(*MsgBroker).consumeMessages\n\t/home/fazliddin/go/go11/Fazliddin/Fazliddin/Ozodjon/4/Booking_service/messagebroker/consumer.go:101\nruntime.goexit\n\t/usr/lib/go-1.22/src/runtime/asm_amd64.s:1695"
+time=2024-08-15T16:16:14.490+05:00 level=INFO msg="CreateBooking called" request="user_id:\"1e61c246-072b-4223-a8ec-a1f58cec1437\"  provider_id:\"string\"  service_id:\"string\"  scheduled_time:\"string\"  location:{}"
+time=2024-08-15T16:16:14.490+05:00 level=ERROR msg="failed to create booking" error="the provided hex string is not a valid ObjectID\ninvalid service ID format\nBooking_Service/storage/mongodb.(*BookingRepo).Add\n\t/home/fazliddin/go/go11/Fazliddin/Fazliddin/Ozodjon/4/Booking_service/storage/mongodb/Booking.go:42\nBooking_Service/service.(*BookingService).CreateBooking\n\t/home/fazliddin/go/go11/Fazliddin/Fazliddin/Ozodjon/4/Booking_service/service/Booking.go:26\nBooking_Service/messagebroker.(*MsgBroker).consumeMessages\n\t/home/fazliddin/go/go11/Fazliddin/Fazliddin/Ozodjon/4/Booking_service/messagebroker/consumer.go:101\nruntime.goexit\n\t/usr/lib/go-1.22/src/runtime/asm_amd64.s:1695"
+time=2024-08-15T16:16:34.758+05:00 level=INFO msg="CreateBooking called" request="user_id:\"1e61c246-072b-4223-a8ec-a1f58cec1437\"  provider_id:\"66bddcb512702a629f888913\"  service_id:\"66bdbfea3ec76f3f7f3f4860\"  scheduled_time:\"string\"  location:{}"
+time=2024-08-15T16:16:34.763+05:00 level=INFO msg="Booking created successfully" response="id:\"66bde3921365c7d0574ad5b2\"  user_id:\"1e61c246-072b-4223-a8ec-a1f58cec1437\"  provider_id:\"66bddcb512702a629f888913\"  service_id:\"66bdbfea3ec76f3f7f3f4860\"  status:\"pending\"  scheduled_time:\"string\"  location:{}  total_price:5  created_at:\"2024-08-15T16:16:34+05:00\"  updated_at:\"2024-08-15T16:16:34+05:00\""
+time=2024-08-15T16:50:21.572+05:00 level=INFO msg="Shutting down, waiting for consumers to finish"
+time=2024-08-15T16:50:21.572+05:00 level=INFO msg="Context done, stopping consumer" consumer=create_booking
+time=2024-08-15T16:50:21.572+05:00 level=INFO msg="Context done, stopping consumer" consumer=create_notification
+time=2024-08-15T16:50:21.572+05:00 level=INFO msg="Context done, stopping consumer" consumer=review_submitted
+time=2024-08-15T16:50:21.572+05:00 level=INFO msg="Context done, stopping consumer" consumer=booking_cancelled
+time=2024-08-15T16:50:21.572+05:00 level=INFO msg="Context done, stopping consumer" consumer=payment_processed

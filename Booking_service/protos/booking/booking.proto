@@ -1,0 +1,353 @@
+syntax = "proto3";
+
+package booking;
+
+option go_package = "genproto/booking";
+
+service ProviderService {
+  rpc RegisterProvider(RegisterProviderRequest) returns (ProviderResponse);
+  rpc GetProvider(IdRequest) returns (ProviderResponse);
+  rpc UpdateProvider(UpdateProviderRequest) returns (ProviderResponse);
+  rpc DeleteProvider(IdRequest) returns (Void);
+  rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse);
+}
+
+service BookingService {
+  rpc CreateBooking(CreateBookingRequest) returns (BookingResponse);
+  rpc GetBooking(IdRequest) returns (BookingResponse);
+  rpc UpdateBooking(UpdateBookingRequest) returns (BookingResponse);
+  rpc CancelBooking(IdRequest) returns (BookingResponse);
+  rpc ListBookings(ListBookingsRequest) returns (ListBookingsResponse);
+}
+
+service ServiceManagementService {
+  rpc CreateService(CreateServiceRequest) returns (ServiceResponse);
+  rpc GetServiceByID(IdRequest) returns (ServiceResponse);
+  rpc UpdateService(UpdateServiceRequest) returns (ServiceResponse);
+  rpc DeleteService(IdRequest) returns (Void);
+  rpc ListServices(ListServicesRequest) returns (ListServicesResponse);
+  rpc PopularServices(Void) returns (ListServicesResponse);
+}
+
+service PaymentService {
+  rpc CreatePayment(CreatePaymentRequest) returns (PaymentResponse);
+  rpc GetPayment(IdRequest) returns (PaymentResponse);
+  rpc ListPayments(ListPaymentsRequest) returns (ListPaymentsResponse);
+}
+service ReviewService {
+  rpc CreateReview(CreateReviewRequest) returns (ReviewResponse);
+  rpc UpdateReview(UpdateReviewRequest) returns (ReviewResponse);
+  rpc GetReviewById(IdRequest) returns (ReviewResponse);
+  rpc DeleteReview(IdRequest) returns (Void);
+  rpc ListReviews(ListReviewsRequest) returns (ListReviewsResponse);
+}
+
+service SearchingService {
+  rpc SearchProviders(Filter) returns (ListProvidersResponses);
+  rpc SearchServices(Filter) returns (ListServicesResponses);
+}
+
+service Notifications {
+  rpc CreateNotification (NewNotification) returns (ID);
+  rpc GetNotification (ID) returns (Notification);
+}
+
+message ID {
+  string id = 1;
+}
+
+message NewNotification {
+  string user_id = 1;
+  string title = 2;
+  string message = 3;
+}
+
+message Notification {
+  string id = 1;
+  string user_id = 2;
+  string title = 3;
+  string message = 4;
+  string created_at = 5;
+}
+
+
+message CreateBookingRequest {
+  string user_id = 1;
+  string provider_id = 2;
+  string service_id = 3;
+  string scheduled_time = 4;
+  GeoPoint location = 5;
+}
+
+message Void{}
+
+message UpdateBookingRequest {
+  string id = 1;
+  string service_id = 2;
+}
+
+message IdRequest {
+  string id = 1;
+}
+
+message ListBookingsRequest {
+  string user_id = 1;
+  int32 page = 2;
+  int32 limit = 3;
+}
+
+message ListBookingsResponse {
+  repeated BookingResponse bookings = 1;
+}
+
+message   BookingResponse {
+  string id = 1;
+  string user_id = 2;
+  string provider_id = 3;
+  string service_id = 4;
+  string status = 5;
+  string scheduled_time = 6;
+  GeoPoint location = 7;
+  double total_price = 8;
+  string created_at = 9;
+  string updated_at = 10;
+}
+
+message CreateServiceRequest {
+  string name = 1;
+  string description = 2;
+  double price = 3;
+  int32 duration = 4;  // Duration in minutes
+}
+
+message UpdateServiceRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  int32 duration = 5;
+}
+
+message ListServicesRequest {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message ListServicesResponse {
+  repeated ServiceResponse services = 1;
+}
+
+message ServiceResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  int32 duration = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
+
+message CreatePaymentRequest {
+  string booking_id = 1;
+  double amount = 2;
+  string payment_method = 3;
+  string transaction_id = 4;
+  string user_id = 5;
+}
+
+message ListPaymentsRequest {
+  string user_id = 1;
+  int32 page = 2;
+  int32 limit = 3;
+}
+
+message ListPaymentsResponse {
+  repeated PaymentResponse payments = 1;
+}
+
+message PaymentResponse {
+  string id = 1;
+  string booking_id = 2;
+  double amount = 3;
+  string status = 4;
+  string payment_method = 5;
+  string transaction_id = 6;
+  string created_at = 7;
+  string updated_at = 8;
+  string user_id = 9;
+}
+
+
+message CreateReviewRequest {
+  string booking_id = 1;
+  string user_id = 2;
+  string provider_id = 3;
+  float rating = 4;  // Rating from 1 to 5
+  string comment = 5;
+}
+
+message UpdateReviewRequest {
+  string id = 1;
+  float rating = 2;  // Rating from 1 to 5
+  string comment = 3;
+}
+
+message ListReviewsRequest {
+  string provider_id = 1;
+  int32 page = 2;
+  int32 limit = 3;
+}
+
+message ListReviewsResponse {
+  repeated ReviewResponse reviews = 1;
+}
+
+message ReviewResponse {
+  string id = 1;
+  string booking_id = 2;
+  string user_id = 3;
+  string provider_id = 4;
+  float rating = 5;
+  string comment = 6;
+  string created_at = 7;
+  string updated_at = 8;
+}
+
+
+message SearchProvidersRequest {
+  string location = 1;
+  repeated string services = 2;
+  string availability = 3;
+  int32 page = 4;
+  int32 limit = 5;
+}
+
+message SearchProvidersResponse {
+  repeated ProviderResponse providers = 1;
+}
+
+message ProviderResponse {
+  string id = 1;
+  string user_id = 2;
+  string company_name = 3;
+  string description = 4;
+  repeated string services = 5;
+  double average_rating = 6;
+  GeoPoint location = 7;
+  string created_at = 8;
+  string updated_at = 9;
+}
+
+message SearchServicesRequest {
+  string provider_id = 1;
+  int32 page = 2;
+  int32 limit = 3;
+}
+
+message SearchServicesResponse {
+  repeated ServiceResponse services = 1;
+}
+
+message GeoPoint {
+  double latitude = 1;
+  double longitude = 2;
+}
+
+message Pagination{
+  int32 limit =1;
+  int32 page =2;
+}
+
+message RegisterProviderRequest {
+  string user_id = 1;            // UUID, references the Users table
+  string company_name = 2;       // Name of the company
+  string description = 3;        // Description of the company
+  repeated string services = 4;  // Array of service IDs
+  string availability = 5; // Array of available time slots
+  double average_rating = 6;     // Average rating
+  GeoPoint location = 7;         // Location as a GeoJSON point
+}
+
+message UpdateProviderRequest {
+  string id = 1;                 // Provider ID
+  string company_name = 2;       // Updated company name
+  string description = 3;        // Updated description
+  repeated string services = 4;  // Updated array of service IDs
+  string availability = 5; // Updated array of available time slots
+  double average_rating = 6;     // Updated average rating
+  GeoPoint location = 7;         // Updated location
+}
+
+message ListProvidersRequest {
+  int32 page = 1;                // Pagination: page number
+  int32 limit = 2;               // Pagination: limit of providers per page
+}
+
+message ListProvidersResponse {
+  repeated ProviderResponse providers = 1; // List of providers
+}
+
+
+// Define the Filter message to encapsulate all search criteria.
+message Filter {
+  string location = 1;               // Location to filter providers/services
+  float rating = 2;                  // Minimum rating to filter providers
+  string companyName = 3;            // Company name to filter providers
+  float price = 4;                   // Maximum price to filter services
+  int32 duration = 5;                // Minimum duration to filter services
+  string scheduledTime = 6;          // Scheduled time to filter providers
+  int32 page = 7;                    // Page number for pagination
+  int32 limit = 8;                   // Limit for pagination
+
+  bool byRating = 9;                 // Sort by rating (descending)
+  bool byPrice = 10;                 // Sort by price (ascending)
+  bool numberOfComments = 11;        // Sort by number of comments (descending)
+}
+
+// Define the Provider message to represent a provider.
+message Provider {
+  string id = 1;                     // Unique ID of the provider
+  string name = 2;                   // Name of the provider
+  string location = 3;               // Location of the provider
+  float averageRating = 4;           // Average rating of the provider
+  int32 numberOfComments = 5;        // Number of comments for the provider
+  string companyName = 6;            // Company name of the provider
+  string availability = 7;           // Availability time range (e.g., "09:00-18:00")
+}
+
+// Define the ListProvidersResponse message to return a list of providers.
+
+
+// Define the Service message to represent a service.
+message Service {
+  string id = 1;                     // Unique ID of the service
+  string name = 2;                   // Name of the service
+  string location = 3;               // Location of the service
+  float price = 4;                   // Price of the service
+  int32 duration = 5;                // Duration of the service in minutes
+}
+
+// Define the ListServicesResponse message to return a list of services.
+
+// Define the Provider message to represent a provider.
+message Providers {
+  string id = 1;                     // Unique ID of the provider
+  string name = 2;                   // Name of the provider
+  string location = 3;               // Location of the provider
+  float averageRating = 4;           // Average rating of the provider
+  int32 numberOfComments = 5;        // Number of comments for the provider
+  string companyName = 6;            // Company name of the provider
+  string availability = 7;           // Availability time range (e.g., "09:00-18:00")
+}
+
+// Define the ListProvidersResponse message to return a list of providers.
+message ListProvidersResponses {
+  repeated Providers provideres = 1;   // List of providers matching the filter criteria
+}
+
+
+
+// Define the ListServicesResponse message to return a list of services.
+message ListServicesResponses {
+  repeated Service services = 1;     // List of services matching the filter criteria
+}

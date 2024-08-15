@@ -1,0 +1,1703 @@
+basePath: /api/v1
+definitions:
+  booking.BookingResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      location:
+        $ref: '#/definitions/booking.GeoPoint'
+      provider_id:
+        type: string
+      scheduled_time:
+        type: string
+      service_id:
+        type: string
+      status:
+        type: string
+      total_price:
+        type: number
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  booking.CreatePaymentRequest:
+    properties:
+      amount:
+        type: number
+      booking_id:
+        type: string
+      payment_method:
+        type: string
+      transaction_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  booking.CreateServiceRequest:
+    properties:
+      description:
+        type: string
+      duration:
+        description: Duration in minutes
+        type: integer
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  booking.GeoPoint:
+    properties:
+      latitude:
+        type: number
+      longitude:
+        type: number
+    type: object
+  booking.ListBookingsResponse:
+    properties:
+      bookings:
+        items:
+          $ref: '#/definitions/booking.BookingResponse'
+        type: array
+    type: object
+  booking.ListPaymentsResponse:
+    properties:
+      payments:
+        items:
+          $ref: '#/definitions/booking.PaymentResponse'
+        type: array
+    type: object
+  booking.ListProvidersResponse:
+    properties:
+      providers:
+        description: List of providers
+        items:
+          $ref: '#/definitions/booking.ProviderResponse'
+        type: array
+    type: object
+  booking.ListProvidersResponses:
+    properties:
+      provideres:
+        description: List of providers matching the filter criteria
+        items:
+          $ref: '#/definitions/booking.Providers'
+        type: array
+    type: object
+  booking.ListReviewsResponse:
+    properties:
+      reviews:
+        items:
+          $ref: '#/definitions/booking.ReviewResponse'
+        type: array
+    type: object
+  booking.ListServicesResponse:
+    properties:
+      services:
+        items:
+          $ref: '#/definitions/booking.ServiceResponse'
+        type: array
+    type: object
+  booking.ListServicesResponses:
+    properties:
+      services:
+        description: List of services matching the filter criteria
+        items:
+          $ref: '#/definitions/booking.Service'
+        type: array
+    type: object
+  booking.NewNotification:
+    properties:
+      message:
+        type: string
+      title:
+        type: string
+      user_id:
+        type: string
+    type: object
+  booking.Notification:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      message:
+        type: string
+      title:
+        type: string
+      user_id:
+        type: string
+    type: object
+  booking.PaymentResponse:
+    properties:
+      amount:
+        type: number
+      booking_id:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      payment_method:
+        type: string
+      status:
+        type: string
+      transaction_id:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  booking.ProviderResponse:
+    properties:
+      average_rating:
+        type: number
+      company_name:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      location:
+        $ref: '#/definitions/booking.GeoPoint'
+      services:
+        items:
+          type: string
+        type: array
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  booking.Providers:
+    properties:
+      availability:
+        description: Availability time range (e.g., "09:00-18:00")
+        type: string
+      averageRating:
+        description: Average rating of the provider
+        type: number
+      companyName:
+        description: Company name of the provider
+        type: string
+      id:
+        description: Unique ID of the provider
+        type: string
+      location:
+        description: Location of the provider
+        type: string
+      name:
+        description: Name of the provider
+        type: string
+      numberOfComments:
+        description: Number of comments for the provider
+        type: integer
+    type: object
+  booking.ReviewResponse:
+    properties:
+      booking_id:
+        type: string
+      comment:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      provider_id:
+        type: string
+      rating:
+        type: number
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  booking.Service:
+    properties:
+      duration:
+        description: Duration of the service in minutes
+        type: integer
+      id:
+        description: Unique ID of the service
+        type: string
+      location:
+        description: Location of the service
+        type: string
+      name:
+        description: Name of the service
+        type: string
+      price:
+        description: Price of the service
+        type: number
+    type: object
+  booking.ServiceResponse:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      duration:
+        type: integer
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  booking.UpdateBookingRequest:
+    properties:
+      id:
+        type: string
+      service_id:
+        type: string
+    type: object
+  booking.UpdateProviderRequest:
+    properties:
+      availability:
+        description: Updated array of available time slots
+        type: string
+      average_rating:
+        description: Updated average rating
+        type: number
+      company_name:
+        description: Updated company name
+        type: string
+      description:
+        description: Updated description
+        type: string
+      id:
+        description: Provider ID
+        type: string
+      location:
+        allOf:
+        - $ref: '#/definitions/booking.GeoPoint'
+        description: Updated location
+      services:
+        description: Updated array of service IDs
+        items:
+          type: string
+        type: array
+    type: object
+  booking.UpdateServiceRequest:
+    properties:
+      description:
+        type: string
+      duration:
+        type: integer
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  models.Booking:
+    properties:
+      location:
+        $ref: '#/definitions/models.GeoPoint'
+      provider_id:
+        type: string
+      scheduled_time:
+        type: string
+      service_id:
+        type: string
+    type: object
+  models.GeoPoint:
+    properties:
+      latitude:
+        type: number
+      longitude:
+        type: number
+    type: object
+  models.Provider:
+    properties:
+      availability:
+        type: string
+      average_rating:
+        type: number
+      company_name:
+        type: string
+      description:
+        type: string
+      location:
+        $ref: '#/definitions/models.GeoPoint'
+      services:
+        items:
+          type: string
+        type: array
+    type: object
+  models.Review:
+    properties:
+      comment:
+        type: string
+      rating:
+        type: number
+    type: object
+  models.ReviewRequest:
+    properties:
+      booking_id:
+        type: string
+      comment:
+        type: string
+      provider_id:
+        type: string
+      rating:
+        type: number
+    type: object
+  models.UUser:
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  users.GetProfileResponse:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: string
+      last_name:
+        type: string
+      phone_number:
+        type: string
+      role:
+        description: Should be 'customer', 'provider', or 'admin'
+        type: string
+    type: object
+  users.UpdateProfileRequest:
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      phone_number:
+        type: string
+      role:
+        description: Should be 'customer', 'provider', or 'admin'
+        type: string
+      user_id:
+        type: string
+    type: object
+  users.UserResponse:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: string
+      last_name:
+        type: string
+      phone_number:
+        type: string
+      role:
+        description: Should be 'customer', 'provider', or 'admin'
+        type: string
+    type: object
+  users.UserResponseU:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: string
+      last_name:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  users.UserResponses:
+    properties:
+      users:
+        items:
+          $ref: '#/definitions/users.UserResponse'
+        type: array
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API Gateway of On-Demand Car Wash Service
+  title: On-Demand Car Wash Service
+  version: "1.0"
+paths:
+  /admin/bookings/all/:id:
+    get:
+      description: Retrieves a list of bookings with pagination
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Page limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ListBookingsResponse'
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Lists bookings with pagination
+      tags:
+      - bookings
+  /admin/payments/{id}:
+    get:
+      description: Retrieves payment details by payment ID
+      parameters:
+      - description: Payment ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.PaymentResponse'
+        "400":
+          description: Invalid payment ID
+          schema:
+            type: string
+        "404":
+          description: Payment not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Retrieves a payment by ID
+      tags:
+      - payments
+  /admin/providers/{id}:
+    get:
+      description: Retrieves provider details by provider ID
+      parameters:
+      - description: Provider ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ProviderResponse'
+        "400":
+          description: Invalid provider ID
+          schema:
+            type: string
+        "404":
+          description: Provider not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Retrieves a provider by ID
+      tags:
+      - providers
+  /admin/reviews/{id}:
+    get:
+      description: Retrieves review details by review ID
+      parameters:
+      - description: Review ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ReviewResponse'
+        "400":
+          description: Invalid review ID
+          schema:
+            type: string
+        "404":
+          description: Review not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Retrieves a review by ID
+      tags:
+      - reviews
+  /admin/services/{id}:
+    get:
+      description: Retrieves service details by service ID
+      parameters:
+      - description: Service ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ServiceResponse'
+        "400":
+          description: Invalid service ID
+          schema:
+            type: string
+        "404":
+          description: Service not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Retrieves a service by ID
+      tags:
+      - services
+  /admin/user:
+    put:
+      description: Updates user info by ID
+      parameters:
+      - description: New user data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/users.UpdateProfileRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.UserResponse'
+        "400":
+          description: Invalid user id
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Updates user
+      tags:
+      - admin
+  /admin/user/{id}:
+    delete:
+      description: Deletes user info by ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: User deleted successfully
+          schema:
+            type: string
+        "400":
+          description: Invalid user id
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Deletes user
+      tags:
+      - admin
+    get:
+      description: Retrieves user info by ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.GetProfileResponse'
+        "400":
+          description: Invalid user id
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Gets user
+      tags:
+      - admin
+  /admin/users:
+    get:
+      description: Retrieves users from the database by filtering
+      parameters:
+      - description: Full name
+        in: query
+        name: full_name
+        type: string
+      - description: Role
+        in: query
+        name: role
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Number of users per page
+        in: query
+        name: limit
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.UserResponses'
+        "400":
+          description: Invalid pagination parameters
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Fetches users
+      tags:
+      - admin
+  /customer/bookings:
+    post:
+      description: Creates a new booking and returns the booking details
+      parameters:
+      - description: Booking details
+        in: body
+        name: booking
+        required: true
+        schema:
+          $ref: '#/definitions/models.Booking'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.BookingResponse'
+        "400":
+          description: Invalid booking data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Creates a new booking
+      tags:
+      - bookings
+  /customer/bookings/{id}:
+    delete:
+      description: Cancels booking by booking ID
+      parameters:
+      - description: Booking ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.BookingResponse'
+        "400":
+          description: Invalid booking ID
+          schema:
+            type: string
+        "404":
+          description: Booking not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Cancels a booking by ID
+      tags:
+      - bookings
+    get:
+      description: Retrieves booking details by booking ID
+      parameters:
+      - description: Booking ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.BookingResponse'
+        "400":
+          description: Invalid booking ID
+          schema:
+            type: string
+        "404":
+          description: Booking not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Retrieves a booking by ID
+      tags:
+      - bookings
+    put:
+      description: Updates booking details by booking ID
+      parameters:
+      - description: Booking ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated booking details
+        in: body
+        name: booking
+        required: true
+        schema:
+          $ref: '#/definitions/booking.UpdateBookingRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.BookingResponse'
+        "400":
+          description: Invalid booking data or ID
+          schema:
+            type: string
+        "404":
+          description: Booking not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Updates a booking by ID
+      tags:
+      - bookings
+  /customer/bookings/all:
+    get:
+      description: Retrieves a list of bookings with pagination
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Page limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ListBookingsResponse'
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Lists bookings with pagination
+      tags:
+      - bookings
+  /customer/payments:
+    get:
+      description: Retrieves a list of payments with pagination
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Page limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ListPaymentsResponse'
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Lists all payments with pagination
+      tags:
+      - payments
+    post:
+      description: Processes a payment and returns the payment details
+      parameters:
+      - description: Payment details
+        in: body
+        name: payment
+        required: true
+        schema:
+          $ref: '#/definitions/booking.CreatePaymentRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.PaymentResponse'
+        "400":
+          description: Invalid payment data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing payment
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Creates a new payment
+      tags:
+      - payments
+  /customer/payments/{id}:
+    get:
+      description: Retrieves payment details by payment ID
+      parameters:
+      - description: Payment ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.PaymentResponse'
+        "400":
+          description: Invalid payment ID
+          schema:
+            type: string
+        "404":
+          description: Payment not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Retrieves a payment by ID
+      tags:
+      - payments
+  /customer/profile:
+    get:
+      description: Retrieves user profile by ID
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.GetProfileResponse'
+        "400":
+          description: Invalid user id
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Gets user
+      tags:
+      - user
+    put:
+      description: Updates user info by ID
+      parameters:
+      - description: New user data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.UUser'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.UserResponseU'
+        "400":
+          description: Invalid user id or data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Updates user
+      tags:
+      - user
+  /customer/providers:
+    get:
+      description: Retrieves a list of providers with pagination
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Page limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ListProvidersResponse'
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Lists all providers with pagination
+      tags:
+      - providers
+  /customer/providers/{id}:
+    get:
+      description: Retrieves provider details by provider ID
+      parameters:
+      - description: Provider ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ProviderResponse'
+        "400":
+          description: Invalid provider ID
+          schema:
+            type: string
+        "404":
+          description: Provider not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Retrieves a provider by ID
+      tags:
+      - providers
+  /customer/reviews:
+    get:
+      description: Retrieves a list of reviews with pagination
+      parameters:
+      - description: Provider ID
+        in: query
+        name: provider_id
+        required: true
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Page limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ListReviewsResponse'
+        "400":
+          description: Invalid request parameters
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Lists all reviews with pagination
+      tags:
+      - reviews
+    post:
+      description: Submits a review for a booking and returns the review details
+      parameters:
+      - description: Review details
+        in: body
+        name: review
+        required: true
+        schema:
+          $ref: '#/definitions/models.ReviewRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ReviewResponse'
+        "400":
+          description: Invalid review data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing review
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Creates a new review
+      tags:
+      - reviews
+  /customer/reviews/{id}:
+    delete:
+      description: Deletes a review by its ID
+      parameters:
+      - description: Review ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Review successfully deleted
+          schema:
+            type: string
+        "400":
+          description: Invalid review ID
+          schema:
+            type: string
+        "404":
+          description: Review not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Deletes a review by ID
+      tags:
+      - reviews
+    get:
+      description: Retrieves review details by review ID
+      parameters:
+      - description: Review ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ReviewResponse'
+        "400":
+          description: Invalid review ID
+          schema:
+            type: string
+        "404":
+          description: Review not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Retrieves a review by ID
+      tags:
+      - reviews
+    put:
+      description: Updates the details of a review by its ID
+      parameters:
+      - description: Review ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Review details
+        in: body
+        name: review
+        required: true
+        schema:
+          $ref: '#/definitions/models.Review'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ReviewResponse'
+        "400":
+          description: Invalid review data
+          schema:
+            type: string
+        "404":
+          description: Review not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing review
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Updates a review by ID
+      tags:
+      - reviews
+  /customer/search/provider:
+    get:
+      description: Searchs Providers and returns details
+      parameters:
+      - description: Sort by rating
+        in: query
+        name: by_rating
+        type: boolean
+      - description: Sort by number of comments
+        in: query
+        name: by_noc
+        type: boolean
+      - description: Company Name
+        in: query
+        name: company
+        type: string
+      - description: Location
+        in: query
+        name: location
+        type: string
+      - description: Ishlash Vaqt oralig`i (8:00-20:00)
+        in: query
+        name: availability
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ListProvidersResponses'
+        "500":
+          description: Server error while processing SearchProviders
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Searchs Providers
+      tags:
+      - search
+  /customer/search/service:
+    get:
+      description: Searchs service and returns details
+      parameters:
+      - description: Sort by price
+        in: query
+        name: by_price
+        type: boolean
+      - description: Location
+        in: query
+        name: location
+        type: string
+      - description: Price
+        in: query
+        name: price
+        type: string
+      - description: Duration
+        in: query
+        name: duration
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ListServicesResponses'
+        "500":
+          description: Server error while processing SearchServices
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Searchs Services
+      tags:
+      - search
+  /customer/services:
+    get:
+      description: Retrieves a list of services with pagination
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Page limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ListServicesResponse'
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Lists all services with pagination
+      tags:
+      - services
+  /customer/services/{id}:
+    get:
+      description: Retrieves service details by service ID
+      parameters:
+      - description: Service ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ServiceResponse'
+        "400":
+          description: Invalid service ID
+          schema:
+            type: string
+        "404":
+          description: Service not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Retrieves a service by ID
+      tags:
+      - services
+  /customer/services/popular:
+    get:
+      description: Retrieves service details
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ListServicesResponse'
+        "400":
+          description: Invalid service ID
+          schema:
+            type: string
+        "404":
+          description: Service not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Retrieves a popular service
+      tags:
+      - services
+  /provider:
+    get:
+      description: Retrieves a list of providers with pagination
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Page limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ListProvidersResponse'
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Lists all providers with pagination
+      tags:
+      - providers
+    post:
+      description: Registers a new provider and returns the provider details
+      parameters:
+      - description: Provider details
+        in: body
+        name: provider
+        required: true
+        schema:
+          $ref: '#/definitions/models.Provider'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ProviderResponse'
+        "400":
+          description: Invalid provider data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Registers a new provider
+      tags:
+      - providers
+  /provider/{id}:
+    delete:
+      description: Deletes a provider by provider ID
+      parameters:
+      - description: Provider ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Invalid provider ID
+          schema:
+            type: string
+        "404":
+          description: Provider not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Deletes a provider by ID
+      tags:
+      - providers
+    get:
+      description: Retrieves provider details by provider ID
+      parameters:
+      - description: Provider ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ProviderResponse'
+        "400":
+          description: Invalid provider ID
+          schema:
+            type: string
+        "404":
+          description: Provider not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Retrieves a provider by ID
+      tags:
+      - providers
+    put:
+      description: Updates provider details by provider ID
+      parameters:
+      - description: Provider ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated provider details
+        in: body
+        name: provider
+        required: true
+        schema:
+          $ref: '#/definitions/booking.UpdateProviderRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ProviderResponse'
+        "400":
+          description: Invalid provider data or ID
+          schema:
+            type: string
+        "404":
+          description: Provider not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Updates a provider by ID
+      tags:
+      - providers
+  /provider/notifications:
+    post:
+      description: Adds a new notification
+      parameters:
+      - description: Receiver ID, Title and Message
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/booking.NewNotification'
+      responses:
+        "201":
+          description: Notification created
+          schema:
+            type: string
+        "400":
+          description: Invalid data format
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Creates notification
+      tags:
+      - notification
+  /provider/notifications/{id}:
+    get:
+      description: Gets notification by ID
+      parameters:
+      - description: Notification ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.Notification'
+        "400":
+          description: Invalid data format
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Gets notification
+      tags:
+      - notification
+  /provider/services:
+    get:
+      description: Retrieves a list of services with pagination
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Page limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ListServicesResponse'
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Lists all services with pagination
+      tags:
+      - services
+    post:
+      description: Creates a new service and returns the service details
+      parameters:
+      - description: Service details
+        in: body
+        name: service
+        required: true
+        schema:
+          $ref: '#/definitions/booking.CreateServiceRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ServiceResponse'
+        "400":
+          description: Invalid service data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Creates a new service
+      tags:
+      - services
+  /provider/services/{id}:
+    put:
+      description: Updates service details by service ID
+      parameters:
+      - description: Service ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated service details
+        in: body
+        name: service
+        required: true
+        schema:
+          $ref: '#/definitions/booking.UpdateServiceRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/booking.ServiceResponse'
+        "400":
+          description: Invalid service data or ID
+          schema:
+            type: string
+        "404":
+          description: Service not found
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Updates a service by ID
+      tags:
+      - services
+schemes:
+- http
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

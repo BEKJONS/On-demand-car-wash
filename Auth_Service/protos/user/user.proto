@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "genproto/users";
+
+service AuthService {
+  rpc Register(RegisterRequest) returns (UserResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc GetProfileU(Id) returns (GetProfileResponse);
+  rpc UpdateProfile(UpdateProfileRequestU) returns (UserResponseU);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+}
+service Admin {
+  rpc GetProfile(Id) returns (GetProfileResponse);
+  rpc UpdateProfileA(UpdateProfileRequest) returns (UserResponse);
+  rpc FetchUsers (Filter) returns (UserResponses);
+  rpc DeleteUser (Id) returns (Void);
+
+}
+
+message Void {}
+message Id{
+  string user_id = 1;
+}
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string phone_number = 5;
+  string role = 6; // Should be 'customer', 'provider', or 'admin'
+}
+
+message UserResponse {
+  string id = 1;
+  string email = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string phone_number = 5;
+  string role = 6; // Should be 'customer', 'provider', or 'admin'
+  string created_at = 7;
+}
+message UserResponseU {
+  string id = 1;
+  string email = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string phone_number = 5;
+  string created_at = 6;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string access = 1;
+  string refresh = 2;
+  string user_id = 3;
+  string role = 4; // Should be 'customer', 'provider', or 'admin'
+}
+
+message LogoutRequest {
+  string user_id = 1;
+}
+
+message LogoutResponse {
+  string message = 1;
+}
+
+
+
+message GetProfileResponse {
+  string id = 1;
+  string email = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string phone_number = 5;
+  string role = 6; // Should be 'customer', 'provider', or 'admin'
+  string created_at = 7;
+}
+
+message UpdateProfileRequest {
+  string user_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string phone_number = 4;
+  string role = 5; // Should be 'customer', 'provider', or 'admin'
+}
+message UpdateProfileRequestU {
+  string user_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string phone_number = 4;
+}
+
+message Filter {
+  string role = 1;
+  int32 page = 2;
+  int32 limit = 3;
+  string first_name =4;
+}
+message UserResponses{
+  repeated UserResponse users = 1;
+}
