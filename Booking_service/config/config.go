@@ -42,7 +42,7 @@ func Load() *Config {
 	cfg.MongoURI = cast.ToString(coalesce("MongoURI", "mongodb://localhost:27017"))
 	cfg.MongoURIL = cast.ToString(coalesce("MongoURIL", "mongodb://localhost:27017"))
 
-	cfg.RABBIT = cast.ToString(coalesce("RABBIT", "amqp://guest:guest@localhost:5672/"))
+	cfg.RABBIT = cast.ToString(coalesce("RABBIT", "amqp://guest:guest@rabbitmq:5672/"))
 
 	cfg.RABBITL = cast.ToString(coalesce("RABBITL", "amqp://guest:guest@localhost:5672/"))
 
