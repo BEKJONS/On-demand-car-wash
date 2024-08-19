@@ -14,6 +14,7 @@ import (
 // @version 1.0
 // @description Authorazation API
 // @BasePath /auth
+// @schemes http
 func NewRouter(s storage.IStorage) *gin.Engine {
 	h := handler.NewHandler(s)
 
