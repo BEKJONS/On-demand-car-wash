@@ -19,8 +19,6 @@ func NewRouter(s storage.IStorage) *gin.Engine {
 
 	router := gin.Default()
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	router.Use(handler.CORSMiddleware())
-
 	auth := router.Group("/auth")
 	auth.POST("/register", h.Register)
 	auth.POST("/login", h.Login)
