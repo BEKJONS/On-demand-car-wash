@@ -18,7 +18,6 @@ import (
 // @title On-Demand Car Wash Service
 // @version 1.0
 // @description API Gateway of On-Demand Car Wash Service
-// @host localhost:8080
 // @BasePath /api/v1
 // @schemes http
 // @securityDefinitions.apikey ApiKeyAuth
