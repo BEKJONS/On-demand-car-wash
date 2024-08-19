@@ -1,4 +1,7 @@
 {
+    "schemes": [
+        "http"
+    ],
     "swagger": "2.0",
     "info": {
         "description": "Authorazation API",
@@ -6,6 +9,7 @@
         "contact": {},
         "version": "1.0"
     },
+    "host": "3.127.57.121:8081",
     "basePath": "/auth",
     "paths": {
         "/login": {

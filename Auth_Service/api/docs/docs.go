@@ -298,9 +298,9 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "",
+	Host:             "3.127.57.121:8081",
 	BasePath:         "/auth",
-	Schemes:          []string{},
+	Schemes:          []string{"http"},
 	Title:            "Authorazation",
 	Description:      "Authorazation API",
 	InfoInstanceName: "swagger",

@@ -13,6 +13,7 @@ import (
 // @title Authorazation
 // @version 1.0
 // @description Authorazation API
+// @host 3.127.57.121:8081
 // @BasePath /auth
 // @schemes http
 func NewRouter(s storage.IStorage) *gin.Engine {

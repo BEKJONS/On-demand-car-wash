@@ -50,6 +50,7 @@ definitions:
         description: Should be 'customer', 'provider', or 'admin'
         type: string
     type: object
+host: 3.127.57.121:8081
 info:
   contact: {}
   description: Authorazation API
@@ -185,4 +186,6 @@ paths:
       summary: Validates token
       tags:
       - auth
+schemes:
+- http
 swagger: "2.0"
