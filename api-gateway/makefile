@@ -1,5 +1,6 @@
 CURRENT_DIR := $(shell pwd)
-DATABASE_URL := postgres://postgres:BEKJONS@localhost:5432/auth_i?sslmode=disable
+DB_PASSWORD ?= changeme
+DATABASE_URL := postgres://postgres:$(DB_PASSWORD)@localhost:5432/auth_i?sslmode=disable
 
 run-router:
 	@go run cmd/router/main.go

@@ -8,7 +8,7 @@ services:
 
     volumes:
       - ./Auth_Service/migrations:/migrations
-    command: [ "-path", "/migrations", "-database", "postgres://postgres:BEKJONS@postgres:5432/auth_i?sslmode=disable", "up" ]
+    command: [ "-path", "/migrations", "-database", "postgres://postgres:${DB_PASSWORD:-changeme}@postgres:5432/auth_i?sslmode=disable", "up" ]
     depends_on:
       - postgres-db
 
@@ -17,7 +17,7 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: BEKJONS
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
       PGDATA: /data/postgres
       POSTGRES_DB: auth_i
     volumes:

@@ -1,0 +1,6 @@
+# Local environment files hold secrets: copy .env.example to .env instead.
+.env
+!.env.example
+
+# Compiled service binaries (built by the Dockerfiles / go build)
+myapp
